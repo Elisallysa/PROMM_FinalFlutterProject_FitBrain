@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:rive/rive.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({Key? key}) : super(key: key);
@@ -217,10 +218,7 @@ class GreenBox extends StatelessWidget {
       child: Column(
         children: [
           const Spacer(),
-          Logo(
-            logoOpacityAnimation: logoOpacityAnimation,
-            logoSizeAnimation: logoSizeAnimation,
-          ),
+          const Logo(),
           const Spacer(),
           Align(
             alignment: Alignment.bottomCenter,
@@ -246,25 +244,28 @@ class GreenBox extends StatelessWidget {
   }
 }
 
-class Logo extends StatelessWidget {
+class Logo extends StatefulWidget {
   const Logo({
     Key? key,
-    required this.logoOpacityAnimation,
-    required this.logoSizeAnimation,
   }) : super(key: key);
 
-  final Animation<double> logoOpacityAnimation;
-  final Animation<double> logoSizeAnimation;
+  @override
+  State<Logo> createState() => _LogoState();
+}
 
+class _LogoState extends State<Logo> {
+  StateMachineController? controller;
   @override
   Widget build(BuildContext context) {
-    return Opacity(
-      opacity: logoOpacityAnimation.value,
-      child: Icon(
-        Icons.star,
-        color: Colors.white,
-        size: logoSizeAnimation.value * 150,
-      ),
+    return RiveAnimation.asset(
+      "assets/walk-demo.riv",
+      stateMachines: const ["Login Machine"],
+      onInit: (artboard) {
+        controller =
+            StateMachineController.fromArtboard(artboard, "Login Machine");
+        if (controller == null) return;
+        artboard.addController(controller!);
+      },
     );
   }
 }
