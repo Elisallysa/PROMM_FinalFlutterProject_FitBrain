@@ -1,0 +1,48 @@
+[
+    {
+    "id": 1,
+    "username": "John",
+    "password": "123",
+    "score": [
+        {
+            "game": "calculo",
+            "record": 345
+        },
+        {
+            "game": "diccionario",
+            "record": 23
+        }
+    ]
+    },
+    {
+    "id": 2,
+    "username": "Mary",
+    "password": "321",
+    "score": [
+        {
+            "game": "calculo",
+            "record": 22
+        },
+        {
+            "game": "diccionario",
+            "record": 123
+        }
+    ]
+    },
+    {
+        "id": 3,
+        "username": "luis",
+        "password": "abc",
+        "score": [
+            {
+                "game": "calculo",
+                "record": 0
+            },
+            {
+                "game": "diccionario",
+                "record": 0
+            }
+        ]
+    }
+
+]
