@@ -4,13 +4,17 @@
 
 import 'dart:convert';
 
+// Método de serialización de string de json a lista de Usuario
 List<Usuario> usuarioFromJson(String str) =>
     List<Usuario>.from(json.decode(str).map((x) => Usuario.fromJson(x)));
 
+// Método de serialización de lista de Usuario a cadena de caracteres
 String usuarioToJson(List<Usuario> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Usuario {
+  // Clase que representa un objeto Usuario con id, nombre, contraseña y una
+  // lista de puntuaciones.
   Usuario({
     required this.id,
     required this.username,

@@ -4,6 +4,8 @@ import 'package:fit_brain/screens/screen_widgets/slide_fade_widget.dart';
 import 'package:flutter/material.dart';
 
 class SigninScreen extends StatefulWidget {
+  // Pantalla de registro de usuarios. Esta pantalla no es funcional porque
+  // se ha conseguido escribir en ficheros json desde la aplicación.
   const SigninScreen({Key? key}) : super(key: key);
 
   @override
@@ -23,6 +25,7 @@ class _SigninScreenState extends State<SigninScreen>
   @override
   void initState() {
     super.initState();
+    // Se inicializa la animación
     _animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 4));
 
@@ -123,7 +126,8 @@ class WhiteBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height:
-          MediaQuery.of(context).size.height * whiteBoxHeightAnimation.value,
+          MediaQuery.of(context).size.height * whiteBoxHeightAnimation.value +
+              6,
       child: SlideFadeWidget(
         commonFadeSlideAnimation: commonFadeSlideAnimation,
         child: const SignInForm(),
@@ -153,139 +157,154 @@ class _SignInFormState extends State<SignInForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 35),
-      child: Form(
-        key: formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            TextFormField(
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          width: 3, color: Color.fromARGB(255, 2, 114, 114)),
-                    ),
-                    labelText: 'Nombre de usuario',
-                    hintText: 'Introduzca su nombre de usuario'),
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return "Introduzca un nombre de usuario.";
-                  } else if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                    //allow upper and lower case alphabets and space
-                    return "Introduzca un usuario con caracteres alfanuméricos.";
-                  } else {
-                    return null;
-                  }
-                }),
-            const SizedBox(
-              height: 20,
-            ),
-            TextFormField(
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 35),
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                  controller: usernameController,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 3, color: Color.fromARGB(255, 2, 114, 114)),
+                      ),
+                      labelText: 'Nombre de usuario',
+                      hintText: 'Introduzca su nombre de usuario'),
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return "Introduzca un nombre de usuario.";
+                    } else if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                      // Controla que el usuario contenga caracteres alfanuméricos.
+                      return "Introduzca un usuario con caracteres alfanuméricos.";
+                    } else {
+                      return null;
+                    }
+                  }),
+              const SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                  controller: pwdController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 3, color: Color.fromARGB(255, 2, 114, 114)),
+                      ),
+                      labelText: 'Contraseña',
+                      hintText: 'Introduzca su contraseña'),
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return "Introduzca una contraseña.";
+                    } else if (!value.contains(RegExp(r'\w+\d+'))) {
+                      // Controla que la contraseña combine caracteres y números.
+                      return 'Debe combinar caracteres y números.';
+                    } else {
+                      return null;
+                    }
+                  }),
+              const SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                controller: pwdCheckController,
                 obscureText: true,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                           width: 3, color: Color.fromARGB(255, 2, 114, 114)),
                     ),
-                    labelText: 'Contraseña',
-                    hintText: 'Introduzca su contraseña'),
+                    labelText: 'Confirmar contraseña',
+                    hintText: 'Confirme su contraseña'),
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Introduzca una contraseña.";
+                    return "Introduzca la confirmación de contraseña.";
                   } else if (!value.contains(RegExp(r'\w+\d+'))) {
-                    return 'Debe combinar un caracter y un número.';
+                    // Controla que la contraseña combine caracteres y números.
+                    return 'Debe combinar caracteres y números.';
                   } else {
                     return null;
                   }
-                }),
-            const SizedBox(
-              height: 20,
-            ),
-            TextFormField(
-              obscureText: true,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 3, color: Color.fromARGB(255, 2, 114, 114)),
+                },
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              ElevatedButton(
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: const Color.fromRGBO(254, 222, 255, 1),
+                    shape: const ContinuousRectangleBorder(),
+                    elevation: 10,
+                    shadowColor: const Color.fromARGB(255, 128, 36, 105),
+                    fixedSize: const Size(double.maxFinite, 50),
                   ),
-                  labelText: 'Confirmar contraseña',
-                  hintText: 'Confirme su contraseña'),
-              validator: (String? value) {
-                if (value == null || value.isEmpty) {
-                  return "Introduzca la confirmación de contraseña.";
-                } else {
-                  return null;
-                }
-              },
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(254, 222, 255, 1),
-                  shape: const ContinuousRectangleBorder(),
-                  elevation: 10,
-                  shadowColor: const Color.fromARGB(255, 128, 36, 105),
-                  fixedSize: const Size(double.maxFinite, 50),
-                ),
-                onPressed: () {
-                  if (usernameController.text.isNotEmpty &&
-                      pwdCheckController.text.isNotEmpty &&
-                      pwdController.text.isNotEmpty) {
-                    if (pwdController.text == pwdCheckController.text) {
-                      if (formKey.currentState!.validate()) {
-                        // Comprueba si los datos son válidos
+                  onPressed: () {
+                    if (usernameController.text.isNotEmpty &&
+                        pwdCheckController.text.isNotEmpty &&
+                        pwdController.text.isNotEmpty) {
+                      if (pwdController.text == pwdCheckController.text) {
+                        if (formKey.currentState!.validate()) {
+                          // Comprueba si los datos son válidos
+                          setState(() {
+                            mensaje = '';
+                          });
+                          // Inserta al usuario en el fichero
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginScreen()));
+                        } else {
+                          setState(() {
+                            mensaje = 'Los campos no son correctos';
+                          });
+                        }
                       } else {
                         setState(() {
-                          mensaje = 'Los campos no son correctos';
+                          mensaje = 'Las contraseñas no coinciden';
                         });
                       }
-                      // Inserta al usuario en el fichero json
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LoginScreen()));
                     } else {
                       setState(() {
-                        mensaje = 'Las contraseñas no coinciden';
+                        mensaje = 'Rellena todos los campos.';
                       });
                     }
-                  } else {
-                    setState(() {
-                      mensaje = 'Rellena todos los campos.';
-                    });
-                  }
+                  },
+                  child: const Text(
+                    'Registrarse',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: Color.fromARGB(255, 2, 114, 114)),
+                  )),
+              const SizedBox(
+                height: 15,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()));
                 },
                 child: const Text(
-                  'Registrarse',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Color.fromARGB(255, 2, 114, 114)),
-                )),
-            const SizedBox(
-              height: 20,
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoginScreen()));
-              },
-              child: const Text(
-                "Volver a Inicio de sesión.",
-                style: TextStyle(color: Color.fromARGB(255, 2, 114, 114)),
+                  "Volver a Inicio de sesión.",
+                  style: TextStyle(color: Color.fromARGB(255, 2, 114, 114)),
+                ),
               ),
-            ),
-            const SizedBox(height: 15),
-            Text(
-              mensaje,
-              style: const TextStyle(fontSize: 12, color: Colors.grey),
-            ),
-          ],
+              const SizedBox(height: 10),
+              Text(
+                mensaje,
+                style: const TextStyle(fontSize: 14, color: Colors.grey),
+              ),
+            ],
+          ),
         ),
       ),
     );

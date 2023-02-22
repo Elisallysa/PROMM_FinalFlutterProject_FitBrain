@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SlideFadeWidget extends StatelessWidget {
+  // Componente para la animación del login y registro. Crea el efecto de "deslizar" los bloques.
   const SlideFadeWidget({
     Key? key,
     required this.commonFadeSlideAnimation,

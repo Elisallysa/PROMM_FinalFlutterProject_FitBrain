@@ -1,13 +1,11 @@
-import 'dart:io';
-
-import 'package:fit_brain/clases_desechadas/stateful_prueba.dart';
+import 'package:fit_brain/screens/game_cambio.dart';
+import 'package:fit_brain/screens/home_screen.dart';
 import 'package:fit_brain/screens/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
+// Main App de Fit Brain
 void main() {
   runApp(const FitBrain());
-  checkFile();
 }
 
 class FitBrain extends StatelessWidget {
@@ -18,17 +16,7 @@ class FitBrain extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Fit Brain',
+      home: LoginScreen(),
     );
-  }
-}
-
-Future<void> checkFile() async {
-  File fi = File('scores/scores.json');
-
-  print(fi.path);
-  if (await fi.exists()) {
-    print('EXISTE ARCHIVO FI');
-  } else {
-    print('NO EXISTE MALDITASEA');
   }
 }

@@ -1,0 +1,27 @@
+[
+    {
+        "pago":1,
+        "preciomax":1,
+        "preciomin":0
+    },
+    {
+        "pago":2,
+        "preciomax":2,
+        "preciomin":0
+    },
+    {
+        "pago":5,
+        "preciomax":5,
+        "preciomin":0
+    },
+    {
+        "pago":7,
+        "preciomax":7,
+        "preciomin":6
+    },
+    {
+        "pago":9,
+        "preciomax":9,
+        "preciomin":7
+    }
+]

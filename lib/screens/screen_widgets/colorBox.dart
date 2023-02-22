@@ -26,6 +26,7 @@ class ColorBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Bloque de color de la animación del login y registro.
     return Container(
       height:
           MediaQuery.of(context).size.height * colorBoxHeightAnimation.value,

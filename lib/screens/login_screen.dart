@@ -1,3 +1,4 @@
+import 'package:fit_brain/screens/home_screen.dart';
 import 'package:fit_brain/screens/screen_widgets/colorBox.dart';
 import 'package:fit_brain/screens/screen_widgets/slide_fade_widget.dart';
 import 'package:fit_brain/screens/signin_screen.dart';
@@ -8,9 +9,9 @@ import 'package:rive/rive.dart';
 
 import '../models/usuario.dart';
 
-// Pantalla de Log in. Busca en la BD del fichero json el usuario y contraseña
-// para permitir el acceso a la aplicación.
 class LoginScreen extends StatefulWidget {
+  // Pantalla de Log in. Busca en la BD del fichero json el usuario y contraseña
+// para permitir el acceso a la aplicación.
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
@@ -148,6 +149,7 @@ class _WhiteBoxState extends State<WhiteBox> {
   var isLoaded = false;
   // Indica si el usuario o contraseña son correctos
   var wrongCredentials = false;
+  String inputUsername = 'usuario';
 
   getData() async {
     // Obtiene los datos de los usuarios almacenados en el fichero json y los
@@ -223,16 +225,24 @@ class _WhiteBoxState extends State<WhiteBox> {
                     fixedSize: const Size(double.maxFinite, 50),
                   ),
                   onPressed: () {
+                    // Se controla la validación de las credenciales, buscando en
+                    // la lista de usuarios registrados aquel que contenga
+                    // el nombre de usuario y contraseña introducidos
                     if (LoginValidation(usuarios!,
                             username: usernameController.text,
                             password: pwdController.text)
                         .isRegistered()) {
                       // Si el usuario y contraseña se encuentran en la bd
                       // se permite el acceso a la aplicación
+                      setState(() {
+                        inputUsername = usernameController.text;
+                      });
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const SigninScreen()));
+                              builder: (context) => HomeScreen(
+                                    username: inputUsername,
+                                  )));
                     } else {
                       setState(() {
                         wrongCredentials = true;
