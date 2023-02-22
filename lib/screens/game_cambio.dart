@@ -54,10 +54,10 @@ class _CambioGameState extends State<CambioGame> {
             child: ListBody(
               children: const <Widget>[
                 Text(
-                  'Observa arriba la cantidad que te debe el cliente y la cantidad que te da.',
+                  'Observa arriba la cantidad que te debe el cliente y la cantidad que te da en billetes y monedas.',
                 ),
                 Text(
-                  'Toca las monedas para sumar el cambio correcto.',
+                  'Toca las monedas de abajo para sumar el cambio correcto.',
                 ),
               ],
             ),
@@ -167,279 +167,271 @@ class _CambioGameState extends State<CambioGame> {
     return Scaffold(
       drawer: const FitBrainDrawer(name: 'user'),
       backgroundColor: AppTheme.palePink,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 35, left: 20, right: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                alignment: Alignment.center,
-                decoration: const BoxDecoration(
-                  color: AppTheme.tile,
-                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              alignment: Alignment.center,
+              decoration: const BoxDecoration(
+                color: AppTheme.tile,
+                borderRadius: BorderRadius.all(Radius.circular(15.0)),
+              ),
+              height: 50,
+              child: const Text(
+                'Da la vuelta',
+                style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Container(
+                padding: const EdgeInsets.only(left: 25, right: 25),
+                decoration: BoxDecoration(
+                  color: AppTheme.greenEmphasis,
+                  border: Border.all(color: AppTheme.greenEmphasis),
+                  borderRadius: const BorderRadius.all(Radius.circular(15.0)),
                 ),
                 height: 50,
-                child: const Text(
-                  'Da la vuelta',
-                  style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Container(
-                  padding: const EdgeInsets.only(left: 25, right: 25),
-                  decoration: BoxDecoration(
-                    color: AppTheme.greenEmphasis,
-                    border: Border.all(color: AppTheme.greenEmphasis),
-                    borderRadius: const BorderRadius.all(Radius.circular(15.0)),
-                  ),
-                  height: 50,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('€',
-                          style: GoogleFonts.orbitron(
-                              textStyle: const TextStyle(
-                                  color: Colors.white, fontSize: 26))),
-                      Text(price.toStringAsFixed(2),
-                          // Texto del precio con 2 decimales
-                          style: GoogleFonts.orbitron(
-                              textStyle: const TextStyle(
-                                  color: Colors.white, fontSize: 26))),
-                    ],
-                  )),
-              const SizedBox(
-                height: 15,
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                height: 210,
-                decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(15))),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Visibility(
-                        visible: coin1.isNotEmpty,
-                        child: SizedBox(width: 140, child: Image.asset(coin1))),
-                    Column(
-                      children: [
-                        Visibility(
-                          visible: coin2.isNotEmpty,
-                          child: SizedBox(
-                              width: 140,
-                              height: 90,
-                              child: Image.asset(coin2)),
-                        ),
-                        Visibility(
-                          visible: coin3.isNotEmpty,
-                          child: SizedBox(
-                              width: 140,
-                              height: 90,
-                              child: Image.asset(coin3)),
-                        )
-                      ],
-                    )
+                    Text('€',
+                        style: GoogleFonts.orbitron(
+                            textStyle: const TextStyle(
+                                color: Colors.white, fontSize: 26))),
+                    Text(price.toStringAsFixed(2),
+                        // Texto del precio con 2 decimales
+                        style: GoogleFonts.orbitron(
+                            textStyle: const TextStyle(
+                                color: Colors.white, fontSize: 26))),
                   ],
-                ),
-              ),
-              const Divider(
-                height: 15,
-                thickness: 1,
-                color: AppTheme.tile,
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(15))),
-                child: GridView.count(
-                  crossAxisCount: 3,
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.only(left: 24, right: 24),
-                  children: [
-                    GestureDetector(
-                        onTap: () {
-                          increaseChange(1);
-                        },
-                        child: Image.asset('images/e1.png')),
-                    GestureDetector(
-                        onTap: () {
-                          increaseChange(0.5);
-                        },
-                        child: Image.asset('images/50.png')),
-                    GestureDetector(
-                        onTap: () {
-                          increaseChange(0.2);
-                        },
-                        child: Image.asset('images/20.png')),
-                    GestureDetector(
-                        onTap: () {
-                          increaseChange(0.1);
-                        },
-                        child: Image.asset('images/10.png')),
-                    GestureDetector(
-                        onTap: () {
-                          increaseChange(0.05);
-                        },
-                        child: Image.asset('images/5.png')),
-                    GestureDetector(
-                        onTap: () {
-                          increaseChange(0.01);
-                        },
-                        child: Image.asset('images/1.png')),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Container(
-                  padding: const EdgeInsets.only(left: 25, right: 25),
-                  decoration: BoxDecoration(
-                    color: AppTheme.greenEmphasis,
-                    border: Border.all(color: AppTheme.greenEmphasis),
-                    borderRadius: const BorderRadius.all(Radius.circular(15.0)),
-                  ),
-                  height: 50,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                )),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              height: 210,
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(15))),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Visibility(
+                      visible: coin1.isNotEmpty,
+                      child: SizedBox(width: 140, child: Image.asset(coin1))),
+                  Column(
                     children: [
-                      Text('€',
-                          style: GoogleFonts.orbitron(
-                              textStyle: const TextStyle(
-                                  color: Colors.white, fontSize: 26))),
-                      Text(change.toStringAsFixed(2),
-                          // Texto del cambio con 2 decimales
-                          style: GoogleFonts.orbitron(
-                              textStyle: TextStyle(
-                                  color: isCorrect ? Colors.white : Colors.red,
-                                  fontSize: 26))),
+                      Visibility(
+                        visible: coin2.isNotEmpty,
+                        child: SizedBox(
+                            width: 140, height: 90, child: Image.asset(coin2)),
+                      ),
+                      Visibility(
+                        visible: coin3.isNotEmpty,
+                        child: SizedBox(
+                            width: 140, height: 90, child: Image.asset(coin3)),
+                      )
                     ],
-                  )),
-              const SizedBox(
-                height: 10,
+                  )
+                ],
               ),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Ink(
-                  // Botón de borrar
-                  decoration: const ShapeDecoration(
-                    color: AppTheme.tile,
-                    shape: CircleBorder(),
-                  ),
-                  child: IconButton(
-                    iconSize: 40,
-                    color: Colors.white,
-                    icon: const Icon(
-                      Icons.close,
-                    ),
-                    onPressed: () {
-                      setState(
-                        () {
-                          change = 0;
-                        },
-                      );
-                    },
-                  ),
+            ),
+            const Divider(
+              height: 15,
+              thickness: 1,
+              color: AppTheme.tile,
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(15))),
+              child: GridView.count(
+                crossAxisCount: 3,
+                shrinkWrap: true,
+                padding: const EdgeInsets.only(left: 24, right: 24),
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        increaseChange(1);
+                      },
+                      child: Image.asset('images/e1.png')),
+                  GestureDetector(
+                      onTap: () {
+                        increaseChange(0.5);
+                      },
+                      child: Image.asset('images/50.png')),
+                  GestureDetector(
+                      onTap: () {
+                        increaseChange(0.2);
+                      },
+                      child: Image.asset('images/20.png')),
+                  GestureDetector(
+                      onTap: () {
+                        increaseChange(0.1);
+                      },
+                      child: Image.asset('images/10.png')),
+                  GestureDetector(
+                      onTap: () {
+                        increaseChange(0.05);
+                      },
+                      child: Image.asset('images/5.png')),
+                  GestureDetector(
+                      onTap: () {
+                        increaseChange(0.01);
+                      },
+                      child: Image.asset('images/1.png')),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+                padding: const EdgeInsets.only(left: 25, right: 25),
+                decoration: BoxDecoration(
+                  color: AppTheme.greenEmphasis,
+                  border: Border.all(color: AppTheme.greenEmphasis),
+                  borderRadius: const BorderRadius.all(Radius.circular(15.0)),
                 ),
-                Ink(
-                  // Botón de enviar
-                  decoration: const ShapeDecoration(
-                    color: AppTheme.tile,
-                    shape: CircleBorder(),
+                height: 50,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('€',
+                        style: GoogleFonts.orbitron(
+                            textStyle: const TextStyle(
+                                color: Colors.white, fontSize: 26))),
+                    Text(change.toStringAsFixed(2),
+                        // Texto del cambio con 2 decimales
+                        style: GoogleFonts.orbitron(
+                            textStyle: TextStyle(
+                                color: isCorrect ? Colors.white : Colors.red,
+                                fontSize: 26))),
+                  ],
+                )),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Ink(
+                // Botón de borrar
+                decoration: const ShapeDecoration(
+                  color: AppTheme.tile,
+                  shape: CircleBorder(),
+                ),
+                child: IconButton(
+                  iconSize: 40,
+                  color: Colors.white,
+                  icon: const Icon(
+                    Icons.close,
                   ),
-                  child: IconButton(
-                    color: Colors.white,
-                    iconSize: 40,
-                    icon: const Icon(
-                      Icons.check,
-                    ),
-                    onPressed: () {
-                      if (change + price == pay) {
-                        // Si el cambio es correcto se crea una nueva ronda y se suman 50 puntos
-                        isCorrect = true;
-                        if (numRondas == 4) {
-                          // Cuando se llega a la 5 ronda, el juego se termina
-                          // y aparece un AlertDialog con la puntuación
-                          setState(
-                            () {
-                              puntuacion += 50;
-                            },
-                          );
-                          showDialog<void>(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text('¡Muy bien!'),
-                                content: SingleChildScrollView(
-                                  child: ListBody(
-                                    children: <Widget>[
-                                      const Text('Has terminado las 5 rondas.'),
-                                      Text(
-                                          'Tu puntuación ha sido: $puntuacion'),
-                                    ],
-                                  ),
-                                ),
-                                actions: <Widget>[
-                                  TextButton(
-                                    onPressed: () => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => GameListView(
-                                                categoria: 'math'))),
-                                    child: const Text('Terminar'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () => {
-                                      setState(() {
-                                        puntuacion = 0;
-                                        price = 0;
-                                        numRondas = 0;
-                                        getRound();
-                                      }),
-                                      Navigator.pop(context, '¡Otra!')
-                                    },
-                                    child: const Text('¡Otra!'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        } else {
-                          // Si todavía no se ha llegado a la 5ª ronda, se suma
-                          // la puntuación y se hace una nueva ronda
-                          setState(
-                            () {
-                              puntuacion += 50;
-                              numRondas++;
-                              getRound();
-                            },
-                          );
-                        }
-                      } else {
-                        // Si el cambio no es correcto, se restan dos puntos
-                        // el cambio se coloreará de rojo
+                  onPressed: () {
+                    setState(
+                      () {
+                        change = 0;
+                      },
+                    );
+                  },
+                ),
+              ),
+              Ink(
+                // Botón de enviar
+                decoration: const ShapeDecoration(
+                  color: AppTheme.tile,
+                  shape: CircleBorder(),
+                ),
+                child: IconButton(
+                  color: Colors.white,
+                  iconSize: 40,
+                  icon: const Icon(
+                    Icons.check,
+                  ),
+                  onPressed: () {
+                    if (change + price == pay) {
+                      // Si el cambio es correcto se crea una nueva ronda y se suman 50 puntos
+                      isCorrect = true;
+                      if (numRondas == 4) {
+                        // Cuando se llega a la 5 ronda, el juego se termina
+                        // y aparece un AlertDialog con la puntuación
                         setState(
                           () {
-                            isCorrect = false;
-                            puntuacion -= 20;
+                            puntuacion += 50;
+                          },
+                        );
+                        showDialog<void>(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('¡Muy bien!'),
+                              content: SingleChildScrollView(
+                                child: ListBody(
+                                  children: <Widget>[
+                                    const Text('Has terminado las 5 rondas.'),
+                                    Text('Tu puntuación ha sido: $puntuacion'),
+                                  ],
+                                ),
+                              ),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              GameListView(categoria: 'math'))),
+                                  child: const Text('Terminar'),
+                                ),
+                                TextButton(
+                                  onPressed: () => {
+                                    setState(() {
+                                      puntuacion = 0;
+                                      price = 0;
+                                      numRondas = 0;
+                                      getRound();
+                                    }),
+                                    Navigator.pop(context, '¡Otra!')
+                                  },
+                                  child: const Text('¡Otra!'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      } else {
+                        // Si todavía no se ha llegado a la 5ª ronda, se suma
+                        // la puntuación y se hace una nueva ronda
+                        setState(
+                          () {
+                            puntuacion += 50;
+                            numRondas++;
+                            getRound();
                           },
                         );
                       }
-                    },
-                  ),
-                )
-              ])
-            ],
-          ),
+                    } else {
+                      // Si el cambio no es correcto, se restan dos puntos
+                      // el cambio se coloreará de rojo
+                      setState(
+                        () {
+                          isCorrect = false;
+                          puntuacion -= 20;
+                        },
+                      );
+                    }
+                  },
+                ),
+              )
+            ])
+          ],
         ),
       ),
     );

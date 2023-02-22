@@ -29,7 +29,7 @@ class JsonUtil {
     return usuarioFromJson(response);
   }
 
-  // Lee el archivo json local y devuelve lista de usuarios
+  // Lee el archivo json local y devuelve lista de pagos
   Future<List<CambioPago>?> readCambioGameJson(String jsonPath) async {
     final String response = await rootBundle.loadString(jsonPath);
     return cambioPagoFromJson(response);
