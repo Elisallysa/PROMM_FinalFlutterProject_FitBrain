@@ -1,10 +1,10 @@
-# fit_brain
+# Fit Brain
 
-A new Flutter project.
+Proyecto final de Flutter para la asignatura Programación Multimedia y Dispositivos Móviles del CFGS Desarrollo de Aplicaciones Multiplataforma.
 
 ## Introducción
 
-Fit Brain es un aplicación desarrollada para la asignatura Programación Multimedia y Dispositivos Móviles. Es un juego pensado para incluir una serie de ejercicios de ejercitación mental de diferentes categorías (cálculo, juegos lingüísticos, de agilidad visual, etc.) La idea está inspirada en el juego Brain Training del Dr. Kawashima de Nintendo Switch.
+Fit Brain es un aplicación pensada para incluir una serie de ejercicios de ejercitación mental de diferentes categorías (cálculo, juegos lingüísticos, de agilidad visual, etc.) La idea está inspirada en el juego Brain Training del Dr. Kawashima de Nintendo Switch.
 
 En este proyecto solo se ha podido implementar un juego: Da el cambio.
 
