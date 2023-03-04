@@ -39,6 +39,7 @@ class _CambioGameState extends State<CambioGame> {
   void increaseChange(double amount) {
     setState(() {
       change += amount;
+      change = change.toPrecision(2);
     });
   }
 
